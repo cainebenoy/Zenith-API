@@ -1,36 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zenith API</title>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quote of the Day</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --primary-color: #10B981;--secondary-color: #1f2937;
+            --background-color: #111827;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --accent-color: #6EE7B7;
+        }
+        body {
+            font-family: 'Newsreader', serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+        }
+</style>
 </head>
 <body>
-    <h1>Zenith API - Daily Quote Generator</h1>
-    <div id="quote-container">
-        <p id="quote-text">Click the button to get a quote!</p>
-        <p id="quote-author"></p>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<header class="absolute top-0 left-0 right-0 z-10">
+<div class="container mx-auto px-4 py-8 md:py-12 flex items-center">
+            <div class="flex items-center gap-3">
+                <svg class="text-white" fill="none" height="36" width="36" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="min-width:36px;min-height:36px;">
+                    <path d="M9.42105 3.1579C6.42105 6.1579 4.63158 10.1579 4 14.1579C3.36842 18.1579 3.73684 22.1579 5.36842 25.8421C6.94737 29.5263 9.68421 32.6842 13.2105 35.0526C16.7368 37.4211 20.8947 38.6316 25.1579 38.6316C29.4211 38.6316 33.5789 37.4211 37.1053 35.0526C40.6316 32.6842 43.3684 29.5263 44.9474 25.8421C46.5263 22.1579 46.8947 18.1579 46.2632 14.1579C45.6316 10.1579 43.8421 6.1579 40.8421 3.1579L25.1579 20.3158L9.42105 3.1579Z" fill="currentColor" transform="scale(0.5) translate(-1, -2)"/>
+                </svg>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-[var(--primary-color)] tracking-tight ml-2">Zenith Quotes</h1>
+            </div>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center">
+<div class="container mx-auto px-4 py-8 md:py-12 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold text-center text-[var(--text-primary)] mb-4">Your Daily Dose of Inspiration</h1>
+    <p class="text-base md:text-lg text-[var(--text-secondary)] text-center max-w-3xl mx-auto">Discover timeless wisdom and powerful words to brighten your day, spark your creativity, and fuel your motivation.</p>
+    <div class="mt-12">
+        <div class="bg-[#1f2937] rounded-lg shadow-lg p-6 md:p-12 max-w-2xl mx-auto">
+            <blockquote class="text-2xl md:text-4xl font-normal text-center italic mb-6" id="quote-text">
+                “The only way to do great work is to love what you do.”
+            </blockquote>
+            <cite class="text-lg md:text-xl text-[var(--text-secondary)] text-center not-italic" id="quote-author">- Steve Jobs</cite>
+        </div>
     </div>
-    <button onclick="getQuote()">Get New Quote</button>
-
-    <script>
-        async function getQuote() {
-            try {
-                const response = await fetch('https://zenith-api-production-9e93.up.railway.app/quote');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const quote = await response.json();
-                
-                document.getElementById('quote-text').innerText = `"${quote.text}"`;
-                document.getElementById('quote-author').innerText = `- ${quote.author}`;
-
-            } catch (error) {
-                console.error("Could not fetch quote:", error);
-                document.getElementById('quote-text').innerText = "Sorry, something went wrong!";
-                document.getElementById('quote-author').innerText = "";
+    <button class="bg-[var(--primary-color)] hover:bg-[var(--accent-color)] text-white font-bold py-3 px-6 rounded-lg mt-8 block mx-auto transition duration-300 ease-in-out transform hover:scale-105 text-gray-900" id="get-quote-btn">
+        Get a New Quote
+    </button>
+</div>
+</main>
+</div>
+<script>
+    async function getQuote() {
+        try {
+            const response = await fetch('https://zenith-api-production-9e93.up.railway.app/quote');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
+            const quote = await response.json();
+            document.getElementById('quote-text').innerText = `“${quote.text}”`;
+            document.getElementById('quote-author').innerText = `- ${quote.author}`;
+        } catch (error) {
+            console.error("Could not fetch quote:", error);
+            document.getElementById('quote-text').innerText = "Sorry, something went wrong!";
+            document.getElementById('quote-author').innerText = "";
         }
-    </script>
-</body>
-</html>
+    }
+    document.getElementById('get-quote-btn').addEventListener('click', getQuote);
+</script>
+</body></html>
