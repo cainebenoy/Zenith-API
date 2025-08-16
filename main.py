@@ -1,9 +1,26 @@
 import random
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, List
 
 app = FastAPI()
 
+# Add this CORS configuration
+origins = [
+    "http://localhost",
+    "http://127.0.0.1",
+    "file://",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
+)
+
+# Data for the quotes, stored as a list of dictionaries
 QUOTES: List[Dict[str, str]] = [
     {"text": "The only way to do great work is to love what you do.", "author": "Steve Jobs"},
     {"text": "Believe you can and you're halfway there.", "author": "Theodore Roosevelt"},
