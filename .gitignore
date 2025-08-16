@@ -1,0 +1,15 @@
+# Python-specific ignored files
+venv/
+__pycache__/
+*.pyc
+
+# IDE and editor files
+.vscode/
+
+# Pytest and coverage
+.pytest_cache/
+.coverage
+
+# Other temporary or log files
+*.log
+.DS_Store
