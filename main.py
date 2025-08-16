@@ -1,7 +1,9 @@
 import random
 from fastapi import FastAPI
 from typing import Dict, List
-app=FastAPI()
+
+app = FastAPI()
+
 QUOTES: List[Dict[str, str]] = [
     {"text": "The only way to do great work is to love what you do.", "author": "Steve Jobs"},
     {"text": "Believe you can and you're halfway there.", "author": "Theodore Roosevelt"},
@@ -11,3 +13,11 @@ QUOTES: List[Dict[str, str]] = [
     {"text": "Start where you are. Use what you have. Do what you can.", "author": "Arthur Ashe"},
     {"text": "Strive not to be a success, but rather to be of value.", "author": "Albert Einstein"}
 ]
+
+@app.get("/quote")
+def get_random_quote():
+    """
+    Returns a random inspirational quote.
+    """
+    random_quote = random.choice(QUOTES)
+    return random_quote
