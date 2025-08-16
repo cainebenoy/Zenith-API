@@ -3,8 +3,7 @@
 This is a simple and fast API built with **FastAPI** that provides a daily dose of inspiration. The **Zenith API** serves a new, random inspirational quote with its author on demand. It’s perfect for integrating into a variety of applications, such as a **New Tab** browser extension, a productivity dashboard, or a daily email newsletter. The project is designed to be lightweight and easy to deploy, demonstrating the power and simplicity of the **FastAPI** framework.
 
 ## Team members
-1. [Name 1](https://github.com/TH-Activities/saturday-hack-night-template)
-2. [Name 2](https://github.com/TH-Activities/saturday-hack-night-template)
+1. [Caine Benoy](https://github.com/TH-Activities/saturday-hack-night-template)
 
 ## Link to product walkthrough
 [link to video](Link Here)
