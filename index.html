@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith API</title>
+</head>
+<body>
+    <h1>Zenith API - Daily Quote Generator</h1>
+    <div id="quote-container">
+        <p id="quote-text">Click the button to get a quote!</p>
+        <p id="quote-author"></p>
+    </div>
+    <button onclick="getQuote()">Get New Quote</button>
+
+    <script>
+        async function getQuote() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/quote');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const quote = await response.json();
+                
+                document.getElementById('quote-text').innerText = `"${quote.text}"`;
+                document.getElementById('quote-author').innerText = `- ${quote.author}`;
+
+            } catch (error) {
+                console.error("Could not fetch quote:", error);
+                document.getElementById('quote-text').innerText = "Sorry, something went wrong!";
+                document.getElementById('quote-author').innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>
